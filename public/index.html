@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Library System</title>
+    <!-- Google Fonts: Outfit -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="nav-brand">📚 Library System</div>
+        <div class="nav-controls">
+            <span id="current-role-display">Role: Public</span>
+            <select id="role-select" onchange="changeRole(this.value)">
+                <option value="public">Public</option>
+                <option value="admin">Admin</option>
+                <option value="user">User</option>
+            </select>
+        </div>
+    </nav>
+
+    <div class="container">
+        <header class="hero-header">
+            <h1>Library Management</h1>
+            <p>A smart library management system featuring real-time geolocation tracking for secure and efficient book
+                borrowing.</p>
+        </header>
+
+        <!-- Admin Section -->
+        <section id="admin-section" class="hidden">
+            <h3>Admin: Add New Book</h3>
+            <form id="add-book-form">
+                <input type="text" id="title" placeholder="Book Title" required>
+                <input type="text" id="author" placeholder="Author" required>
+                <input type="number" id="stock" placeholder="Stock" required>
+                <button type="submit">Add Book</button>
+            </form>
+        </section>
+
+        <!-- User Section -->
+        <section id="user-section" class="hidden">
+            <h3>User: Borrow Book</h3>
+            <p>Click "Borrow" on a book to borrow it. Geolocation will be sent automatically.</p>
+            <div id="user-location-status">Location not captured yet.</div>
+        </section>
+
+        <!-- Book List -->
+        <section id="book-list-section">
+            <h3>Available Books</h3>
+            <button onclick="fetchBooks()">Refresh List</button>
+            <div id="book-list" class="book-grid">
+                <!-- Books will be loaded here -->
+            </div>
+        </section>
+    </div>
+
+    <!-- Edit Modal -->
+    <div id="edit-modal" class="modal hidden">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeEditModal()">&times;</span>
+            <h3 style="margin-top: 0;">Update Book</h3>
+            <form id="edit-book-form">
+                <input type="hidden" id="edit-id">
+                <label for="edit-title">Title</label>
+                <input type="text" id="edit-title" required>
+                <label for="edit-author">Author</label>
+                <input type="text" id="edit-author" required>
+                <label for="edit-stock">Stock</label>
+                <input type="number" id="edit-stock" required>
+                <button type="submit">Save Changes</button>
+            </form>
+        </div>
+    </div>
+
+    <div id="toast-container"></div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
